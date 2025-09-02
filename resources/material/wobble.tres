@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dfhp0sx2b4rho"]
+
+[ext_resource type="Shader" uid="uid://batol0dgom7vk" path="res://resources/material/wobble.gdshader" id="1_m8iue"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m8iue"]
+noise_type = 0
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgg25"]
+seamless = true
+noise = SubResource("FastNoiseLite_m8iue")
+
+[resource]
+shader = ExtResource("1_m8iue")
+shader_parameter/deformation_sampler = SubResource("NoiseTexture2D_jgg25")
+shader_parameter/radius = 25.0
+shader_parameter/box_size = Vector2(100, 100)
+shader_parameter/box_padding = 5.0
+shader_parameter/wobble_amount = 0.5
+shader_parameter/wobble_speed = 1.0
+shader_parameter/wobble_detail = 0.5
