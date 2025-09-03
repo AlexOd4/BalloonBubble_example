@@ -764,5 +764,3 @@ position = Vector2(576, 324)
 [connection signal="body_exited" from="Signal01" to="Signal01" method="_on_body_exited"]
 [connection signal="body_entered" from="Signal02" to="Signal02" method="_on_body_entered"]
 [connection signal="body_exited" from="Signal02" to="Signal02" method="_on_body_exited"]
-
-[editable path="Player"]
