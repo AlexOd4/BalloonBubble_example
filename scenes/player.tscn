@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8e3m6uwknepj" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cx1qv7cmklqf8" path="res://sprites/spritesheet-characters-default.png" id="2_qhqgy"]
-[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://scripts/marker_dialogue_2d.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -76,10 +76,13 @@ animation = &"walk"
 frame_progress = 0.516462
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 20)
+position = Vector2(0, 17)
 shape = SubResource("CapsuleShape2D_y4r1p")
 
 [node name="Pepito" type="Marker2D" parent="." groups=["balloon_marker"]]
 position = Vector2(3, 26)
 script = ExtResource("3_qhqgy")
 metadata/_custom_type_script = "uid://cl3ysctkqfri0"
+
+[node name="Marker2D" type="Marker2D" parent="Pepito"]
+position = Vector2(88, -110)

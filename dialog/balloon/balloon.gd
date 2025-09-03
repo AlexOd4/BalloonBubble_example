@@ -1,6 +1,9 @@
 extends Node2D
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+## Special delimiter for the same character in various places
+@export var marker_name_delimiter: String = "-"
+
 ## The group of markers were characters will speak
 @export var marker_group: StringName = &"balloon_marker"
 
@@ -118,12 +121,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	#we set the size to zero to resize it to its minimun size
-	#balloon.size = Vector2.ONE
-	
 	# we check if balloon_marker its asigned, Then take the position of it with a offset to make it match with the center of the textbox
 	# if there is not a balloon_marker we set any position (prefferred for example the center of the screen) 
-	if balloon_marker: balloon_position_start = balloon_marker.global_position - balloon.size/2
+	if balloon_marker: 
+		balloon_position_start = balloon_marker.global_position - balloon.size/2
+		if balloon_marker is MarkerDialogue2D: fixed_balloon_offset = balloon_marker.dialogue_offset
 	else: balloon_position_start = Vector2.ZERO
 	
 	# we set the real viewport of the screen calculating it with camera position in mind
@@ -240,16 +242,14 @@ func apply_dialogue_line() -> void:
 	
 	is_waiting_for_input = false
 	
-	# this make characters names able to have emojis
-	#dialogue_line.character = Global.character_to_emoji(dialogue_line.character) 
+	if not marker_name_delimiter == "" and dialogue_line.character.contains(marker_name_delimiter):
+		dialogue_line.character = dialogue_line.character.split(marker_name_delimiter)[0]
 	
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
 	
 	dialogue_label.hide()
 	
-	# this make text able to have emojis
-	#dialogue_line.text = IconsFonts.parse_text(dialogue_line.text) 
 	dialogue_label.dialogue_line = dialogue_line
 	responses_menu.hide()
 	responses_menu.modulate = Color.TRANSPARENT

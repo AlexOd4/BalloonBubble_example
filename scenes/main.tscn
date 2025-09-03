@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://bvisggsciry5h"]
+[gd_scene load_steps=14 format=4 uid="uid://bvisggsciry5h"]
 
 [ext_resource type="Texture2D" uid="uid://bnlv7h7qtnsri" path="res://sprites/spritesheet-backgrounds-default.png" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://cfd7g3c44oay0" path="res://sprites/spritesheet-tiles-default.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b0anoahbfgn54" path="res://scenes/player.tscn" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bt2to6rd6lmd4" path="res://scenes/area_dialogue_enter.gd" id="4_jyhfs"]
+[ext_resource type="Resource" uid="uid://co5xpvdxdyy1c" path="res://dialog/test_dialog.dialogue" id="5_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://dvql81r2qcpky" path="res://icon.svg" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://scripts/marker_dialogue_2d.gd" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="5_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("2_sugp2")
@@ -699,40 +700,58 @@ tile_map_data = PackedByteArray("AAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAA
 tile_set = SubResource("TileSet_jyhfs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
-tile_map_data = PackedByteArray("AAAAAAkAAAAHAA4AAAABAAkAAAAHAA8AAAACAAkAAAAHAA8AAAADAAkAAAAHAA8AAAAEAAkAAAAHAA8AAAAFAAkAAAAHAA8AAAAGAAkAAAAHAA8AAAAHAAkAAAAHAA8AAAAIAAkAAAAHAA8AAAAJAAkAAAAHAA8AAAAKAAkAAAAHAA8AAAALAAkAAAAHAA8AAAAMAAkAAAAHAA8AAAANAAkAAAAHAA8AAAAOAAkAAAAHAA8AAAAPAAkAAAAHAA8AAAAQAAkAAAAHAA8AAAARAAkAAAAHAA0AAAAAAAoAAAAHABEAAAABAAoAAAAIAAAAAAACAAoAAAAIAAAAAAADAAoAAAAIAAAAAAAEAAoAAAAIAAAAAAAFAAoAAAAIAAAAAAAGAAoAAAAIAAAAAAAHAAoAAAAIAAAAAAAIAAoAAAAIAAAAAAAJAAoAAAAIAAAAAAAKAAoAAAAIAAAAAAALAAoAAAAIAAAAAAAMAAoAAAAIAAAAAAANAAoAAAAIAAAAAAAOAAoAAAAIAAAAAAAPAAoAAAAIAAAAAAAQAAoAAAAIAAAAAAARAAoAAAAHABAAAAAEAAgAAAAKAA0AAAA=")
+tile_map_data = PackedByteArray("AAAAAAkAAAAHAA4AAAABAAkAAAAHAA8AAAACAAkAAAAHAA8AAAADAAkAAAAHAA8AAAAEAAkAAAAHAA8AAAAFAAkAAAAHAA8AAAAGAAkAAAAHAA8AAAAHAAkAAAAHAA8AAAAIAAkAAAAHAA8AAAAJAAkAAAAHAA8AAAAKAAkAAAAHAA8AAAALAAkAAAAHAA8AAAAMAAkAAAAHAA8AAAANAAkAAAAHAA8AAAAOAAkAAAAHAA8AAAAPAAkAAAAHAA8AAAAQAAkAAAAHAA8AAAARAAkAAAAHAA0AAAAAAAoAAAAHABEAAAABAAoAAAAIAAAAAAACAAoAAAAIAAAAAAADAAoAAAAIAAAAAAAEAAoAAAAIAAAAAAAFAAoAAAAIAAAAAAAGAAoAAAAIAAAAAAAHAAoAAAAIAAAAAAAIAAoAAAAIAAAAAAAJAAoAAAAIAAAAAAAKAAoAAAAIAAAAAAALAAoAAAAIAAAAAAAMAAoAAAAIAAAAAAANAAoAAAAIAAAAAAAOAAoAAAAIAAAAAAAPAAoAAAAIAAAAAAAQAAoAAAAIAAAAAAARAAoAAAAHABAAAAAEAAgAAAAKAA0AAAAOAAgAAAAKAA0AAAA=")
 tile_set = SubResource("TileSet_tbgi4")
 
 [node name="Player" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(398, 504)
 
-[node name="Pepito" parent="Player" index="2"]
-position = Vector2(3, -42)
-dialogue_offset = null
-dialogue_direction = null
-
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
+[node name="Signal01" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
 position = Vector2(364, 542)
 script = ExtResource("4_jyhfs")
 sprite_show = NodePath("Icon")
+dialogue = ExtResource("5_o6xl0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Signal01"]
 shape = SubResource("CircleShape2D_sugp2")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Signal01"]
 position = Vector2(-152, 0)
 shape = SubResource("CircleShape2D_sugp2")
 
-[node name="Signal" type="Marker2D" parent="Area2D" groups=["balloon_marker"]]
+[node name="Signal-01" type="Marker2D" parent="Signal01" groups=["balloon_marker"]]
 position = Vector2(-76, -42)
 script = ExtResource("5_tefeu")
-dialogue_offset = null
-dialogue_direction = null
+dialogue_offset = Vector2(100, -100)
 metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
-[node name="Marker2D" type="Marker2D" parent="Area2D/Signal"]
-position = Vector2(-142, -100)
+[node name="Icon" type="Sprite2D" parent="Signal01"]
+visible = false
+position = Vector2(-76, -106)
+scale = Vector2(0.109375, 0.5625)
+texture = ExtResource("5_tbgi4")
 
-[node name="Icon" type="Sprite2D" parent="Area2D"]
+[node name="Signal02" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
+position = Vector2(1007, 542)
+script = ExtResource("4_jyhfs")
+sprite_show = NodePath("Icon")
+dialogue = ExtResource("5_o6xl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Signal02"]
+shape = SubResource("CircleShape2D_sugp2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Signal02"]
+position = Vector2(-152, 0)
+shape = SubResource("CircleShape2D_sugp2")
+
+[node name="Signal-02" type="Marker2D" parent="Signal02" groups=["balloon_marker"]]
+position = Vector2(-76, -42)
+script = ExtResource("5_tefeu")
+dialogue_offset = Vector2(100, -100)
+metadata/_custom_type_script = "uid://cl3ysctkqfri0"
+
+[node name="Icon" type="Sprite2D" parent="Signal02"]
+visible = false
 position = Vector2(-76, -106)
 scale = Vector2(0.109375, 0.5625)
 texture = ExtResource("5_tbgi4")
@@ -740,7 +759,7 @@ texture = ExtResource("5_tbgi4")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
-
-[editable path="Player"]
+[connection signal="body_entered" from="Signal01" to="Signal01" method="_on_body_entered"]
+[connection signal="body_exited" from="Signal01" to="Signal01" method="_on_body_exited"]
+[connection signal="body_entered" from="Signal02" to="Signal02" method="_on_body_entered"]
+[connection signal="body_exited" from="Signal02" to="Signal02" method="_on_body_exited"]
