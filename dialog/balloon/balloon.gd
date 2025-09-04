@@ -287,20 +287,31 @@ func next(next_id: String) -> void:
 ## it will get the offset of a rect from another taking the farthes point in x and y to return a 
 ## vector2 taking the distance to make the rect be inside the principal rect
 func get_offset_of_rect_outside_screen(screen_rect: Rect2, rect: Rect2, other_position: Vector2 = rect.position):
+	# we set the rect position to the position we want to calculate
 	rect.position = other_position
+	
+	# we create an array of all corner points of the rect
 	var rect_points: Array =[
 		rect.position,
 		Vector2(rect.end.x,rect.position.y),
 		rect.end,
 		Vector2(rect.position.x,rect.end.y)
 	]
+	
+	# we create the farthest point to do future calculations 
 	var farthest_point: Vector2
+	
+	# we create max_distance with -Infinite to make the first comparation be always true
 	var max_distance := Vector2(-INF, -INF)
 	
 	for point in rect_points:
+		
+		# this will be the distance of the point to its closest point to the rect
 		var distance: Vector2
+		
+		# this will be the closest point to make the rect be inside the screen_rect
 		var closest_point: Vector2
-		## if screen_rect.has_point(point) does not work as intended use this:
+		# if screen_rect.has_point(point) does not work as intended use this:
 			#if not ((point.x > screen_rect.position.x and point.x < screen_rect.end.x) and (point.y > screen_rect.position.y and point.y < screen_rect.end.y)):
 		if not screen_rect.has_point(point):
 			closest_point = Vector2(
@@ -311,12 +322,16 @@ func get_offset_of_rect_outside_screen(screen_rect: Rect2, rect: Rect2, other_po
 				abs(point.x - closest_point.x), 
 				abs(point.y - closest_point.y)
 			)
+		# we check in x and y if the distance is greather than max_distance and if its true 
+		# we override the max_distance to distance and farthest_point to the actual point iteration
 		if distance.x > max_distance.x:
 			max_distance.x = distance.x
 			farthest_point.x = point.x
 		if distance.y > max_distance.y:
 			max_distance.y = distance.y
 			farthest_point.y = point.y
+	
+	# we will return the distance from the closest_point of the farthest_point
 	return Vector2(clampf(farthest_point.x, screen_rect.position.x, screen_rect.end.x),
 		clampf(farthest_point.y, screen_rect.position.y, screen_rect.end.y)
 		) - farthest_point

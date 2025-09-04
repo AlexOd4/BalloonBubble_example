@@ -52,8 +52,7 @@ var responses: Array = []:
 					item.response = response
 				# Otherwise assume we can just set the text
 				else:
-					#item.text = response.text
-					item.get_child(0).text_with_icons = response.text
+					item.text = response.text
 				item.set_meta("response", response)
 				
 				add_child(item)
