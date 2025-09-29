@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0anoahbfgn54"]
+[gd_scene load_steps=12 format=3 uid="uid://b0anoahbfgn54"]
 
 [ext_resource type="Script" uid="uid://8e3m6uwknepj" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cx1qv7cmklqf8" path="res://sprites/spritesheet-characters-default.png" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="3_qhqgy"]
+[ext_resource type="Theme" uid="uid://c7w22nq0aamwd" path="res://resources/themes/example_theme.tres" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -82,7 +83,8 @@ shape = SubResource("CapsuleShape2D_y4r1p")
 [node name="Pepito" type="Marker2D" parent="." groups=["balloon_marker"]]
 position = Vector2(3, 26)
 script = ExtResource("3_qhqgy")
+custom_theme = ExtResource("4_dqkch")
 metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
 [node name="Marker2D" type="Marker2D" parent="Pepito"]
-position = Vector2(88, -110)
+position = Vector2(87, -117)

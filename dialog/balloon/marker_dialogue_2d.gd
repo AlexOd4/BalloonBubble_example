@@ -9,6 +9,8 @@ var being_used: bool
 ## this will be an array of MarkerDialogue2D
 var markers_being_used: Array
 
+
+@export var custom_theme: Theme
 ## This option will be overrided by the child position and 
 ## changued if automatic direction is enabled.
 @export var dialogue_offset: Vector2 = Vector2(100, -100):

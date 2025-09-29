@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://gwic1qnitfs6"
+path="res://.godot/imported/test_dialog_camera_zoom.dialogue-6ceec0b9752cd8bd148bc47d40e8ee0c.tres"
+
+[deps]
+
+source_file="res://dialog/test_dialog_camera_zoom.dialogue"
+dest_files=["res://.godot/imported/test_dialog_camera_zoom.dialogue-6ceec0b9752cd8bd148bc47d40e8ee0c.tres"]
+
+[params]
+
+defaults=true

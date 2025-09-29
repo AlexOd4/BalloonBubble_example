@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=4 uid="uid://bvisggsciry5h"]
+[gd_scene load_steps=18 format=4 uid="uid://bvisggsciry5h"]
 
 [ext_resource type="Texture2D" uid="uid://bnlv7h7qtnsri" path="res://sprites/spritesheet-backgrounds-default.png" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://cfd7g3c44oay0" path="res://sprites/spritesheet-tiles-default.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://b0anoahbfgn54" path="res://scenes/player.tscn" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://bt2to6rd6lmd4" path="res://scenes/area_dialogue_enter.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://bt2to6rd6lmd4" path="res://scripts/area_dialogue_enter.gd" id="4_jyhfs"]
 [ext_resource type="Resource" uid="uid://co5xpvdxdyy1c" path="res://dialog/test_dialog.dialogue" id="5_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://dvql81r2qcpky" path="res://icon.svg" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://b3s0njryi8qvh" path="res://sprites/vector_style2.png" id="7_tipki"]
 [ext_resource type="Resource" uid="uid://bpt1kaeseu4xg" path="res://dialog/test_dialog_02.dialogue" id="8_tipki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
@@ -351,7 +351,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0wfyh")
 sources/1 = SubResource("TileSetAtlasSource_sugp2")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tipki"]
 texture = ExtResource("2_sugp2")
 texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
@@ -562,6 +562,7 @@ texture_region_size = Vector2i(64, 64)
 5:13/0 = 0
 6:13/0 = 0
 7:13/0 = 0
+7:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 8:13/0 = 0
 9:13/0 = 0
 10:13/0 = 0
@@ -580,6 +581,7 @@ texture_region_size = Vector2i(64, 64)
 5:14/0 = 0
 6:14/0 = 0
 7:14/0 = 0
+7:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 8:14/0 = 0
 9:14/0 = 0
 10:14/0 = 0
@@ -642,6 +644,7 @@ texture_region_size = Vector2i(64, 64)
 15:17/0 = 0
 16:17/0 = 0
 17:17/0 = 0
+17:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 10:17/0 = 0
 11:17/0 = 0
 11:16/0 = 0
@@ -686,10 +689,47 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_tbgi4"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_jyhfs")
+sources/0 = SubResource("TileSetAtlasSource_tipki")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sugp2"]
 radius = 27.2947
+
+[sub_resource type="Animation" id="Animation_choun"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_85g3d"]
+resource_name = "default"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ya4ey"]
+_data = {
+&"RESET": SubResource("Animation_choun"),
+&"default": SubResource("Animation_85g3d")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -701,14 +741,11 @@ tile_map_data = PackedByteArray("AAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAA
 tile_set = SubResource("TileSet_jyhfs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
-tile_map_data = PackedByteArray("AAAAAAkAAAAHAA4AAAABAAkAAAAHAA8AAAACAAkAAAAHAA8AAAADAAkAAAAHAA8AAAAEAAkAAAAHAA8AAAAFAAkAAAAHAA8AAAAGAAkAAAAHAA8AAAAHAAkAAAAHAA8AAAAIAAkAAAAHAA8AAAAJAAkAAAAHAA8AAAAKAAkAAAAHAA8AAAALAAkAAAAHAA8AAAAMAAkAAAAHAA8AAAANAAkAAAAHAA8AAAAOAAkAAAAHAA8AAAAPAAkAAAAHAA8AAAAQAAkAAAAHAA8AAAARAAkAAAAHAA0AAAAAAAoAAAAHABEAAAABAAoAAAAIAAAAAAACAAoAAAAIAAAAAAADAAoAAAAIAAAAAAAEAAoAAAAIAAAAAAAFAAoAAAAIAAAAAAAGAAoAAAAIAAAAAAAHAAoAAAAIAAAAAAAIAAoAAAAIAAAAAAAJAAoAAAAIAAAAAAAKAAoAAAAIAAAAAAALAAoAAAAIAAAAAAAMAAoAAAAIAAAAAAANAAoAAAAIAAAAAAAOAAoAAAAIAAAAAAAPAAoAAAAIAAAAAAAQAAoAAAAIAAAAAAARAAoAAAAHABAAAAAEAAgAAAAKAA0AAAAOAAgAAAAKAA0AAAA=")
+tile_map_data = PackedByteArray("AAAAAAkAAAAHAA4AAAABAAkAAAAHAA8AAAACAAkAAAAHAA8AAAADAAkAAAAHAA8AAAAEAAkAAAAHAA8AAAAFAAkAAAAHAA8AAAAGAAkAAAAHAA8AAAAHAAkAAAAHAA8AAAAIAAkAAAAHAA8AAAAJAAkAAAAHAA8AAAAKAAkAAAAHAA8AAAALAAkAAAAHAA8AAAAMAAkAAAAHAA8AAAANAAkAAAAHAA8AAAAOAAkAAAAHAA8AAAAPAAkAAAAHAA8AAAAQAAkAAAAHAA8AAAARAAkAAAAHAA0AAAAAAAoAAAAHABEAAAABAAoAAAAIAAAAAAACAAoAAAAIAAAAAAADAAoAAAAIAAAAAAAEAAoAAAAIAAAAAAAFAAoAAAAIAAAAAAAGAAoAAAAIAAAAAAAHAAoAAAAIAAAAAAAIAAoAAAAIAAAAAAAJAAoAAAAIAAAAAAAKAAoAAAAIAAAAAAALAAoAAAAIAAAAAAAMAAoAAAAIAAAAAAANAAoAAAAIAAAAAAAOAAoAAAAIAAAAAAAPAAoAAAAIAAAAAAAQAAoAAAAIAAAAAAARAAoAAAAHABAAAAAEAAgAAAAKAA0AAAAOAAgAAAAKAA0AAAD//woAAAARABEAAAD//wkAAAARABEAAAD//wgAAAARABEAAAD//wcAAAARABEAAAD//wYAAAARABEAAAD//wUAAAARABEAAAD//wQAAAARABEAAAD//wMAAAARABEAAAD//wIAAAARABEAAAD//wEAAAARABEAAAD//wAAAAARABEAAAD/////AAARABEAAAAAAP//AAARABEAAAABAP//AAARABEAAAACAP//AAARABEAAAADAP//AAARABEAAAAEAP//AAARABEAAAAFAP//AAARABEAAAAGAP//AAARABEAAAAHAP//AAARABEAAAAIAP//AAARABEAAAAJAP//AAARABEAAAAKAP//AAARABEAAAALAP//AAARABEAAAAMAP//AAARABEAAAANAP//AAARABEAAAAOAP//AAARABEAAAAPAP//AAARABEAAAAQAP//AAARABEAAAARAP//AAARABEAAAASAP//AAARABEAAAASAAAAAAARABEAAAASAAEAAAARABEAAAASAAIAAAARABEAAAASAAMAAAARABEAAAASAAQAAAARABEAAAASAAUAAAARABEAAAASAAYAAAARABEAAAASAAcAAAARABEAAAASAAgAAAARABEAAAASAAkAAAARABEAAAASAAoAAAARABEAAAASAAsAAAARABEAAAA=")
 tile_set = SubResource("TileSet_tbgi4")
 
 [node name="Player" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(398, 504)
-
-[node name="Marker2D" parent="Player/Pepito" index="0"]
-position = Vector2(81, -124)
 
 [node name="Signal01" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
 position = Vector2(364, 542)
@@ -730,9 +767,18 @@ metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
 [node name="Icon" type="Sprite2D" parent="Signal01"]
 visible = false
-position = Vector2(-76, -106)
-scale = Vector2(0.109375, 0.5625)
-texture = ExtResource("5_tbgi4")
+position = Vector2(-78, -80)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_tipki")
+hframes = 10
+vframes = 3
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Signal01/Icon"]
+libraries = {
+&"": SubResource("AnimationLibrary_ya4ey")
+}
+autoplay = "default"
 
 [node name="Signal02" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
 position = Vector2(1007, 542)
@@ -754,9 +800,18 @@ metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
 [node name="Icon" type="Sprite2D" parent="Signal02"]
 visible = false
-position = Vector2(-76, -106)
-scale = Vector2(0.109375, 0.5625)
-texture = ExtResource("5_tbgi4")
+position = Vector2(-78, -80)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_tipki")
+hframes = 10
+vframes = 3
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Signal02/Icon"]
+libraries = {
+&"": SubResource("AnimationLibrary_ya4ey")
+}
+autoplay = "default"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -765,5 +820,3 @@ position = Vector2(576, 324)
 [connection signal="body_exited" from="Signal01" to="Signal01" method="_on_body_exited"]
 [connection signal="body_entered" from="Signal02" to="Signal02" method="_on_body_entered"]
 [connection signal="body_exited" from="Signal02" to="Signal02" method="_on_body_exited"]
-
-[editable path="Player"]

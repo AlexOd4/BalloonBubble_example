@@ -106,7 +106,9 @@ var character_name : String = ""
 ## Current active camera
 @onready var camera : Camera2D = get_viewport().get_camera_2d()
 
+@onready var bubble_container: Control = %BubbleContainer
 
+@onready var default_theme: Theme = %BubbleContainer.theme
 
 func _ready() -> void:
 	input_catcher.hide()
@@ -123,10 +125,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# we check if balloon_marker its asigned, Then take the position of it with a offset to make it match with the center of the textbox
 	# if there is not a balloon_marker we set any position (prefferred for example the center of the screen) 
-	if balloon_marker: 
+	if balloon_marker:
 		balloon_position_start = balloon_marker.global_position - balloon.size/2
 		if balloon_marker is MarkerDialogue2D: fixed_balloon_offset = balloon_marker.dialogue_offset
-	else: balloon_position_start = Vector2.ZERO
+		line.show()
+	else: 
+		line.hide()
+		balloon_position_start = get_viewport_rect().get_center()
 	
 	# we set the real viewport of the screen calculating it with camera position in mind
 	var real_viewport_rect:Rect2 = self.get_viewport_rect()
@@ -144,7 +149,6 @@ func _process(_delta: float) -> void:
 	var screen_offset :Vector2 = get_offset_of_rect_outside_screen(real_viewport_rect, balloon.get_rect(), balloon_position_target)
 	# we set the balloon_position_end to be the current postion of the balloon
 	balloon_position_end = balloon_position_target + screen_offset
-	
 	if start_animation :
 		start_animation = false
 		# we set the positions to its "default"
@@ -158,7 +162,7 @@ func _process(_delta: float) -> void:
 		tween = get_tree().create_tween().set_ease(tween_ease_type).set_trans(tween_transition_type)
 		# animating the balloon and line
 		tween.tween_property(balloon, "global_position", balloon_position_end, tween_time)
-		tween.parallel().tween_property(text_box, "scale", Vector2.ONE/zoom, tween_time).set_delay(tween_time)
+		tween.parallel().tween_property(balloon, "scale", Vector2.ONE/zoom, tween_time).set_delay(tween_time)
 		tween.parallel().tween_property(line, "scale", Vector2.ONE, tween_time)
 		# we wait until the tween is finished to continue the process
 		await tween.finished
@@ -215,6 +219,15 @@ func apply_dialogue_line() -> void:
 	for marker in get_tree().get_nodes_in_group(marker_group) as Array[Marker2D]:
 		if dialogue_line.character == marker.name: 
 			balloon_marker = marker
+			
+			var next_theme: Theme
+			if balloon_marker is MarkerDialogue2D and balloon_marker.custom_theme:
+				balloon_marker = balloon_marker as MarkerDialogue2D
+				next_theme = balloon_marker.custom_theme
+			else: next_theme = default_theme
+			
+			bubble_container.theme = next_theme
+			line.default_color = bubble_container.theme.get_stylebox("panel", "PanelContainer").bg_color
 			break
 	
 	# We get the minimum size of the balloon

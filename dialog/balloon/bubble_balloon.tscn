@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddenh546wr0qx"]
+[gd_scene load_steps=9 format=3 uid="uid://ddenh546wr0qx"]
 
 [ext_resource type="Script" uid="uid://cn53spksaxlj" path="res://dialog/balloon/balloon.gd" id="1_pfrur"]
+[ext_resource type="Theme" uid="uid://dlp0eub7tmond" path="res://resources/themes/bubble_theme.tres" id="2_cumd7"]
 [ext_resource type="Material" uid="uid://dfhp0sx2b4rho" path="res://resources/material/wobble.tres" id="2_p2xnc"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="4_0e8ky"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="5_iofpd"]
@@ -9,114 +10,18 @@
 _data = [Vector2(0.251852, 0), 0.0, 1.84745, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.329412, 0.329412, 0.329412, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri4m3"]
-bg_color = Color(0.121569, 0.121569, 0.121569, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0njw"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.6, 0.6, 0.6, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkmqt"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="Theme" id="Theme_qq3yp"]
-default_font_size = 20
-Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
-Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
-Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
-Button/styles/normal = SubResource("StyleBoxFlat_e0njw")
-MarginContainer/constants/margin_bottom = 15
-MarginContainer/constants/margin_left = 30
-MarginContainer/constants/margin_right = 30
-MarginContainer/constants/margin_top = 15
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfrur"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-shadow_size = 1
-shadow_offset = Vector2(0, 2)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2xnc"]
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_w6lk8"]
 metadata/_custom_type_script = "uid://b5q8ym3xn25io"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6lk8"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2xnc"]
-bg_color = Color(0.446777, 0.446777, 0.446777, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e8ky"]
-bg_color = Color(0.787759, 0.787759, 0.787759, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmwhh"]
-bg_color = Color(0.273873, 0.273873, 0.273873, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="Theme" id="Theme_1wfgo"]
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/styles/focus = SubResource("StyleBoxFlat_p2xnc")
-Button/styles/hover = SubResource("StyleBoxFlat_p2xnc")
-Button/styles/normal = SubResource("StyleBoxFlat_0e8ky")
-Button/styles/pressed = SubResource("StyleBoxFlat_dmwhh")
-
 [node name="BubbleBalloon" type="Node2D"]
 z_index = 5
 script = ExtResource("1_pfrur")
-fixed_balloon_offset = Vector2(0, 200)
+fixed_balloon_offset = Vector2(0, 50)
 
 [node name="BubbleLine" type="Line2D" parent="."]
 unique_name_in_owner = true
@@ -124,6 +29,7 @@ points = PackedVector2Array(509, -221, 409, -146, 261, -76, 0, 0)
 width_curve = SubResource("Curve_e5tac")
 
 [node name="BubbleContainer" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource("Theme_qq3yp")
+theme = ExtResource("2_cumd7")
 
 [node name="Bubble" type="VBoxContainer" parent="BubbleContainer"]
 unique_name_in_owner = true
@@ -148,12 +54,15 @@ alignment = 1
 z_index = 1
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="BubbleContainer/Bubble/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="BubbleContainer/Bubble/CenterContainer"]
 custom_minimum_size = Vector2(50, 25)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pfrur")
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2xnc")
 
-[node name="CharacterLabel" type="RichTextLabel" parent="BubbleContainer/Bubble/CenterContainer/Panel"]
+[node name="Panel" type="Panel" parent="BubbleContainer/Bubble/CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="CharacterLabel" type="RichTextLabel" parent="BubbleContainer/Bubble/CenterContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
@@ -173,7 +82,6 @@ material = ExtResource("2_p2xnc")
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_w6lk8")
 
 [node name="TextBoxVertical" type="VBoxContainer" parent="BubbleContainer/Bubble/TextBox"]
 unique_name_in_owner = true
@@ -214,7 +122,6 @@ response_template = NodePath("ResponseExample")
 [node name="ResponseExample" type="Button" parent="BubbleContainer/Bubble/TextBox/TextBoxVertical/MarginResponses/ResponsesMenu"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = SubResource("Theme_1wfgo")
 text = "Response example"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

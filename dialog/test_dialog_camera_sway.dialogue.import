@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cpmutroavtcdj"
+path="res://.godot/imported/test_dialog_camera_sway.dialogue-c1be28e8ea2fb1ab764dcd64153e124a.tres"
+
+[deps]
+
+source_file="res://dialog/test_dialog_camera_sway.dialogue"
+dest_files=["res://.godot/imported/test_dialog_camera_sway.dialogue-c1be28e8ea2fb1ab764dcd64153e124a.tres"]
+
+[params]
+
+defaults=true
