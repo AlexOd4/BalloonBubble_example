@@ -1,16 +1,16 @@
 [gd_scene load_steps=18 format=4 uid="uid://bvisggsciry5h"]
 
-[ext_resource type="Texture2D" uid="uid://bnlv7h7qtnsri" path="res://sprites/spritesheet-backgrounds-default.png" id="1_0wfyh"]
-[ext_resource type="Texture2D" uid="uid://cfd7g3c44oay0" path="res://sprites/spritesheet-tiles-default.png" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://b0anoahbfgn54" path="res://scenes/player.tscn" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://bt2to6rd6lmd4" path="res://scripts/area_dialogue_enter.gd" id="4_jyhfs"]
-[ext_resource type="Resource" uid="uid://co5xpvdxdyy1c" path="res://dialog/test_dialog.dialogue" id="5_o6xl0"]
-[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="5_tefeu"]
-[ext_resource type="Texture2D" uid="uid://b3s0njryi8qvh" path="res://sprites/vector_style2.png" id="7_tipki"]
-[ext_resource type="Resource" uid="uid://bpt1kaeseu4xg" path="res://dialog/test_dialog_02.dialogue" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://cfd7g3c44oay0" path="res://sprites/spritesheet-tiles-default.png" id="1_q0qxw"]
+[ext_resource type="Texture2D" uid="uid://bnlv7h7qtnsri" path="res://sprites/spritesheet-backgrounds-default.png" id="2_u2ww3"]
+[ext_resource type="PackedScene" uid="uid://b0anoahbfgn54" path="res://scenes/player.tscn" id="3_s1r26"]
+[ext_resource type="Script" uid="uid://bt2to6rd6lmd4" path="res://scripts/area_dialogue_enter.gd" id="4_0xyjq"]
+[ext_resource type="Resource" uid="uid://co5xpvdxdyy1c" path="res://dialog/test_dialog.dialogue" id="5_bvn6q"]
+[ext_resource type="Script" uid="uid://cl3ysctkqfri0" path="res://dialog/balloon/marker_dialogue_2d.gd" id="6_jwc78"]
+[ext_resource type="Texture2D" uid="uid://b3s0njryi8qvh" path="res://sprites/vector_style2.png" id="7_acnpa"]
+[ext_resource type="Resource" uid="uid://bpt1kaeseu4xg" path="res://dialog/test_dialog_02.dialogue" id="8_se22f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
-texture = ExtResource("2_sugp2")
+texture = ExtResource("1_q0qxw")
 texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 1:1/0 = 0
@@ -328,7 +328,7 @@ texture_region_size = Vector2i(64, 64)
 17:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
-texture = ExtResource("1_0wfyh")
+texture = ExtResource("2_u2ww3")
 texture_region_size = Vector2i(256, 256)
 1:0/0 = 0
 2:0/0 = 0
@@ -352,7 +352,7 @@ sources/0 = SubResource("TileSetAtlasSource_0wfyh")
 sources/1 = SubResource("TileSetAtlasSource_sugp2")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tipki"]
-texture = ExtResource("2_sugp2")
+texture = ExtResource("1_q0qxw")
 texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 1:1/0 = 0
@@ -744,14 +744,14 @@ tile_set = SubResource("TileSet_jyhfs")
 tile_map_data = PackedByteArray("AAAAAAkAAAAHAA4AAAABAAkAAAAHAA8AAAACAAkAAAAHAA8AAAADAAkAAAAHAA8AAAAEAAkAAAAHAA8AAAAFAAkAAAAHAA8AAAAGAAkAAAAHAA8AAAAHAAkAAAAHAA8AAAAIAAkAAAAHAA8AAAAJAAkAAAAHAA8AAAAKAAkAAAAHAA8AAAALAAkAAAAHAA8AAAAMAAkAAAAHAA8AAAANAAkAAAAHAA8AAAAOAAkAAAAHAA8AAAAPAAkAAAAHAA8AAAAQAAkAAAAHAA8AAAARAAkAAAAHAA0AAAAAAAoAAAAHABEAAAABAAoAAAAIAAAAAAACAAoAAAAIAAAAAAADAAoAAAAIAAAAAAAEAAoAAAAIAAAAAAAFAAoAAAAIAAAAAAAGAAoAAAAIAAAAAAAHAAoAAAAIAAAAAAAIAAoAAAAIAAAAAAAJAAoAAAAIAAAAAAAKAAoAAAAIAAAAAAALAAoAAAAIAAAAAAAMAAoAAAAIAAAAAAANAAoAAAAIAAAAAAAOAAoAAAAIAAAAAAAPAAoAAAAIAAAAAAAQAAoAAAAIAAAAAAARAAoAAAAHABAAAAAEAAgAAAAKAA0AAAAOAAgAAAAKAA0AAAD//woAAAARABEAAAD//wkAAAARABEAAAD//wgAAAARABEAAAD//wcAAAARABEAAAD//wYAAAARABEAAAD//wUAAAARABEAAAD//wQAAAARABEAAAD//wMAAAARABEAAAD//wIAAAARABEAAAD//wEAAAARABEAAAD//wAAAAARABEAAAD/////AAARABEAAAAAAP//AAARABEAAAABAP//AAARABEAAAACAP//AAARABEAAAADAP//AAARABEAAAAEAP//AAARABEAAAAFAP//AAARABEAAAAGAP//AAARABEAAAAHAP//AAARABEAAAAIAP//AAARABEAAAAJAP//AAARABEAAAAKAP//AAARABEAAAALAP//AAARABEAAAAMAP//AAARABEAAAANAP//AAARABEAAAAOAP//AAARABEAAAAPAP//AAARABEAAAAQAP//AAARABEAAAARAP//AAARABEAAAASAP//AAARABEAAAASAAAAAAARABEAAAASAAEAAAARABEAAAASAAIAAAARABEAAAASAAMAAAARABEAAAASAAQAAAARABEAAAASAAUAAAARABEAAAASAAYAAAARABEAAAASAAcAAAARABEAAAASAAgAAAARABEAAAASAAkAAAARABEAAAASAAoAAAARABEAAAASAAsAAAARABEAAAA=")
 tile_set = SubResource("TileSet_tbgi4")
 
-[node name="Player" parent="." instance=ExtResource("3_sugp2")]
+[node name="Player" parent="." instance=ExtResource("3_s1r26")]
 position = Vector2(398, 504)
 
 [node name="Signal01" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
 position = Vector2(364, 542)
-script = ExtResource("4_jyhfs")
+script = ExtResource("4_0xyjq")
 sprite_show = NodePath("Icon")
-dialogue = ExtResource("5_o6xl0")
+dialogue = ExtResource("5_bvn6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Signal01"]
 shape = SubResource("CircleShape2D_sugp2")
@@ -762,14 +762,14 @@ shape = SubResource("CircleShape2D_sugp2")
 
 [node name="Signal-01" type="Marker2D" parent="Signal01" groups=["balloon_marker"]]
 position = Vector2(-76, -42)
-script = ExtResource("5_tefeu")
+script = ExtResource("6_jwc78")
 metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
 [node name="Icon" type="Sprite2D" parent="Signal01"]
 visible = false
 position = Vector2(-78, -80)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_tipki")
+texture = ExtResource("7_acnpa")
 hframes = 10
 vframes = 3
 frame = 3
@@ -782,9 +782,9 @@ autoplay = "default"
 
 [node name="Signal02" type="Area2D" parent="." node_paths=PackedStringArray("sprite_show")]
 position = Vector2(1007, 542)
-script = ExtResource("4_jyhfs")
+script = ExtResource("4_0xyjq")
 sprite_show = NodePath("Icon")
-dialogue = ExtResource("8_tipki")
+dialogue = ExtResource("8_se22f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Signal02"]
 shape = SubResource("CircleShape2D_sugp2")
@@ -795,14 +795,14 @@ shape = SubResource("CircleShape2D_sugp2")
 
 [node name="Signal-02" type="Marker2D" parent="Signal02" groups=["balloon_marker"]]
 position = Vector2(-76, -42)
-script = ExtResource("5_tefeu")
+script = ExtResource("6_jwc78")
 metadata/_custom_type_script = "uid://cl3ysctkqfri0"
 
 [node name="Icon" type="Sprite2D" parent="Signal02"]
 visible = false
 position = Vector2(-78, -80)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_tipki")
+texture = ExtResource("7_acnpa")
 hframes = 10
 vframes = 3
 frame = 3
