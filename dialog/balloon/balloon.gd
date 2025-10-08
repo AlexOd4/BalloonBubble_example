@@ -75,6 +75,8 @@ var balloon_marker: Marker2D
 ## the character name identifier of the speaker in scene
 var character_name : String = ""
 
+## camera camera_zoom
+var camera_zoom := Vector2.ONE
 
 ## The base input_catcher
 @onready var input_catcher: Control = %InputCatcher
@@ -123,25 +125,24 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# we check if balloon_marker its asigned, Then take the position of it with a offset to make it match with the center of the textbox
-	# if there is not a balloon_marker we set any position (prefferred for example the center of the screen) 
-	if balloon_marker:
-		balloon_position_start = balloon_marker.global_position - balloon.size/2
-		if balloon_marker is MarkerDialogue2D: fixed_balloon_offset = balloon_marker.dialogue_offset
-		line.show()
-	else: 
-		line.hide()
-		balloon_position_start = get_viewport_rect().get_center()
-	
 	# we set the real viewport of the screen calculating it with camera position in mind
 	var real_viewport_rect:Rect2 = self.get_viewport_rect()
 	
 	# we get the zoom of the camera for future calculates
-	var zoom := Vector2.ONE
 	if camera: 
 		real_viewport_rect = Rect2(camera.global_position - camera.get_viewport_rect().get_center() / camera.zoom, 
 			camera.get_viewport_rect().size / camera.zoom)
-		zoom = camera.zoom
+		camera_zoom = camera.zoom
+	
+	# we check if balloon_marker its asigned, Then take the position of it with a offset to make it match with the center of the textbox
+	# if there is not a balloon_marker we set any position (prefferred for example the center of the screen) 
+	if balloon_marker:
+		balloon_position_start = balloon_marker.global_position - balloon.size/2
+		# we set the line position to balloon_marker position
+		line.global_position = balloon_marker.global_position
+		if balloon_marker is MarkerDialogue2D: fixed_balloon_offset = balloon_marker.dialogue_offset
+	else: 
+		balloon_position_start = real_viewport_rect.get_center() - balloon.size/2
 	
 	# this will be the target position with our offset
 	var balloon_position_target = balloon_position_start + fixed_balloon_offset
@@ -149,21 +150,27 @@ func _process(_delta: float) -> void:
 	var screen_offset :Vector2 = get_offset_of_rect_outside_screen(real_viewport_rect, balloon.get_rect(), balloon_position_target)
 	# we set the balloon_position_end to be the current postion of the balloon
 	balloon_position_end = balloon_position_target + screen_offset
-	if start_animation :
+	
+	# if our balloon is near to balloon_position_start we show our line to be seen
+	if balloon.global_position.distance_to(balloon_position_start) <= 30:
+		line.show()
+	
+	# its triggered in function apply_dialogue_line
+	if start_animation:
 		start_animation = false
-		# we set the positions to its "default"
-		balloon.global_position = balloon_position_start 
 		balloon.scale = Vector2.ZERO
-		line.scale = Vector2.ZERO
-		
 		# if there is a tween created, kill it to reasing it again 
 		if tween: tween.kill()
 		# tween properties
 		tween = get_tree().create_tween().set_ease(tween_ease_type).set_trans(tween_transition_type)
-		# animating the balloon and line
-		tween.tween_property(balloon, "global_position", balloon_position_end, tween_time)
-		tween.parallel().tween_property(balloon, "scale", Vector2.ONE/zoom, tween_time).set_delay(tween_time)
-		tween.parallel().tween_property(line, "scale", Vector2.ONE, tween_time)
+		# animating the balloon
+		tween.tween_method(
+			func (values): 
+				balloon.global_position = values[0]
+				balloon.scale = Vector2.ONE/camera_zoom
+				line.scale = values[1]
+				,
+			[balloon_position_start, Vector2.ZERO], [balloon_position_end, Vector2.ONE], tween_time)
 		# we wait until the tween is finished to continue the process
 		await tween.finished
 		# you can delete this line if you dont want input to wait the animation 
@@ -173,12 +180,10 @@ func _process(_delta: float) -> void:
 		balloon.global_position = balloon_position_end
 		
 		# this will scale the balloon to keep allways the same size in screen
-		balloon.scale = (Vector2.ONE/zoom)
+		balloon.scale = (Vector2.ONE/camera_zoom)
 	
 	# we create and make the calculations curve the line until it reaches the balloon balloon
 	var curve := Curve2D.new()
-	# we set the line position to balloon_marker position
-	line.global_position = balloon_position_start + balloon.size/2
 	# This will be the start position of the point of the line 
 		# (we set it to Vector2.ZERO because it will be the same as line.global_positoin)
 	curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, balloon_position_end.y-balloon_position_start.y)*-.2)
@@ -248,6 +253,8 @@ func apply_dialogue_line() -> void:
 	# we changue character_name to make it the same as the one who is talking in the dialogue
 	if not dialogue_line.character == character_name:
 		character_name = dialogue_line.character
+		# we hide the line until it's close to the new character marker 
+		line.hide()
 		# we start the animation in process
 		start_animation = true
 		# we wait delta process time to sync this function to process 
