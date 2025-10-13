@@ -123,7 +123,7 @@ func _ready() -> void:
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
 
-#TODO: try move blocks of code in diferent functions to not calculate it all time (Optimizing)
+
 func _process(_delta: float) -> void:
 	# we set the real viewport of the screen calculating it with camera position in mind
 	var real_viewport_rect:Rect2 = self.get_viewport_rect()
@@ -151,14 +151,16 @@ func _process(_delta: float) -> void:
 	# we set the balloon_position_end to be the current postion of the balloon
 	balloon_position_end = balloon_position_target + screen_offset
 	
-	# if our balloon is near to balloon_position_start we show our line to be seen
-	if balloon.global_position.distance_to(balloon_position_start) <= 30:
+	# if our balloon is between balloon_position_end and balloon_position_start we show our line to be seen	
+	if (balloon_position_start.cross(balloon_position_end) * balloon.global_position.cross(balloon_position_start) <= 0 and
+		balloon_position_start.cross(balloon_position_end) * balloon.global_position.cross(balloon_position_end) >= 0
+		):
 		line.show()
 	
 	# its triggered in function apply_dialogue_line
 	if start_animation:
 		start_animation = false
-		balloon.scale = Vector2.ZERO
+		#balloon.scale = Vector2.ZERO
 		# if there is a tween created, kill it to reasing it again 
 		if tween: tween.kill()
 		# tween properties
@@ -167,8 +169,25 @@ func _process(_delta: float) -> void:
 		tween.tween_method(
 			func (values): 
 				balloon.global_position = values[0]
+				
+				# For Better Animation
+				#balloon.pivot_offset = balloon.size/2
+				#balloon.scale.x = lerpf(0, 1/camera_zoom.x, values[1].x)
+				#balloon.scale.y = lerpf(0, 1/camera_zoom.y, values[1].y)
+				
 				balloon.scale = Vector2.ONE/camera_zoom
 				line.scale = values[1]
+				# we create and make the calculations curve the line until it reaches the balloon balloon
+				var curve := Curve2D.new()
+				# This will be the start position of the point of the line 
+					# (we set it to Vector2.ZERO because it will be the same as line.global_positoin)
+				curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, balloon_position_end.y-balloon_position_start.y)*-.2)
+				# This will be the end position of the point of the line we set it to be inside the balloon
+				curve.add_point(balloon.get_rect().get_center() - line.global_position)
+				# we asign the curve to the points array of line 
+				line.points = curve.tessellate(5)
+				# we changue the width of the line to adapt balloon size
+				line.width = balloon.get_rect().size.x * 0.25
 				,
 			[balloon_position_start, Vector2.ZERO], [balloon_position_end, Vector2.ONE], tween_time)
 		# we wait until the tween is finished to continue the process
@@ -178,23 +197,10 @@ func _process(_delta: float) -> void:
 	else:
 		# we set the end positions if the camera moves
 		balloon.global_position = balloon_position_end
-		
 		# this will scale the balloon to keep allways the same size in screen
 		balloon.scale = (Vector2.ONE/camera_zoom)
-	
-	# we create and make the calculations curve the line until it reaches the balloon balloon
-	var curve := Curve2D.new()
-	# This will be the start position of the point of the line 
-		# (we set it to Vector2.ZERO because it will be the same as line.global_positoin)
-	curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, balloon_position_end.y-balloon_position_start.y)*-.2)
-	# This will be the end position of the point of the line we set it to be inside the balloon
-	curve.add_point(balloon.get_rect().get_center() - line.global_position)
-	# we asign the curve to the points array of line 
-	line.points = curve.tessellate(5)
-	# we changue the width of the line to adapt balloon size
-	line.width = balloon.get_rect().size.x * 0.25
-	
-	
+
+
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
 	get_viewport().set_input_as_handled()
