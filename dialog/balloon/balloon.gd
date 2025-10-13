@@ -157,6 +157,18 @@ func _process(_delta: float) -> void:
 		):
 		line.show()
 	
+	# we create and make the calculations curve the line until it reaches the balloon balloon
+	var curve := Curve2D.new()
+	# This will be the start position of the point of the line 
+		# (we set it to Vector2.ZERO because it will be the same as line.global_positoin)
+	curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, balloon_position_end.y-balloon_position_start.y)*-.2)
+	# This will be the end position of the point of the line we set it to be inside the balloon
+	curve.add_point(balloon.get_rect().get_center() - line.global_position)
+	# we asign the curve to the points array of line 
+	line.points = curve.tessellate(5)
+	# we changue the width of the line to adapt balloon size
+	line.width = balloon.get_rect().size.x * 0.25
+	
 	# its triggered in function apply_dialogue_line
 	if start_animation:
 		start_animation = false
@@ -177,17 +189,6 @@ func _process(_delta: float) -> void:
 				
 				balloon.scale = Vector2.ONE/camera_zoom
 				line.scale = values[1]
-				# we create and make the calculations curve the line until it reaches the balloon balloon
-				var curve := Curve2D.new()
-				# This will be the start position of the point of the line 
-					# (we set it to Vector2.ZERO because it will be the same as line.global_positoin)
-				curve.add_point(Vector2.ZERO, Vector2.ZERO, Vector2(0, balloon_position_end.y-balloon_position_start.y)*-.2)
-				# This will be the end position of the point of the line we set it to be inside the balloon
-				curve.add_point(balloon.get_rect().get_center() - line.global_position)
-				# we asign the curve to the points array of line 
-				line.points = curve.tessellate(5)
-				# we changue the width of the line to adapt balloon size
-				line.width = balloon.get_rect().size.x * 0.25
 				,
 			[balloon_position_start, Vector2.ZERO], [balloon_position_end, Vector2.ONE], tween_time)
 		# we wait until the tween is finished to continue the process
@@ -199,7 +200,7 @@ func _process(_delta: float) -> void:
 		balloon.global_position = balloon_position_end
 		# this will scale the balloon to keep allways the same size in screen
 		balloon.scale = (Vector2.ONE/camera_zoom)
-
+	
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
