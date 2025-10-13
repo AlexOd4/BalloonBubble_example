@@ -123,7 +123,7 @@ func _ready() -> void:
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
 
-
+#TODO: try move blocks of code in diferent functions to not calculate it all time (Optimizing)
 func _process(_delta: float) -> void:
 	# we set the real viewport of the screen calculating it with camera position in mind
 	var real_viewport_rect:Rect2 = self.get_viewport_rect()
