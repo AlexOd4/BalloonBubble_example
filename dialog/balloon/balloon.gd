@@ -172,25 +172,28 @@ func _process(_delta: float) -> void:
 	# its triggered in function apply_dialogue_line
 	if start_animation:
 		start_animation = false
-		#balloon.scale = Vector2.ZERO
 		# if there is a tween created, kill it to reasing it again 
 		if tween: tween.kill()
 		# tween properties
 		tween = get_tree().create_tween().set_ease(tween_ease_type).set_trans(tween_transition_type)
 		# animating the balloon
 		tween.tween_method(
-			func (values): 
-				balloon.global_position = values[0]
+			func (value): 
+				#This will changue the position of the balloon even if the start or/and end position changues
+				balloon.global_position.x = lerpf(balloon_position_start.x, balloon_position_end.x, value)
+				balloon.global_position.y = lerpf(balloon_position_start.y, balloon_position_end.y, value)
 				
-				# For Better Animation
-				#balloon.pivot_offset = balloon.size/2
-				#balloon.scale.x = lerpf(0, 1/camera_zoom.x, values[1].x)
-				#balloon.scale.y = lerpf(0, 1/camera_zoom.y, values[1].y)
+				# we set the pivot to it's center
+				balloon.pivot_offset = balloon.size/2
 				
-				balloon.scale = Vector2.ONE/camera_zoom
-				line.scale = values[1]
+				# This will animate the balloon to pop up from Vector.ZERO
+				balloon.scale.x = lerpf(0, 1/camera_zoom.x, value)
+				balloon.scale.y = lerpf(0, 1/camera_zoom.y, value)
+				
+				# Changues the line scale with value
+				line.scale = Vector2.ONE * value
 				,
-			[balloon_position_start, Vector2.ZERO], [balloon_position_end, Vector2.ONE], tween_time)
+			0.0, 1.0, tween_time)
 		# we wait until the tween is finished to continue the process
 		await tween.finished
 		# you can delete this line if you dont want input to wait the animation 
