@@ -7,8 +7,8 @@ noise_type = 0
 fractal_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgg25"]
-seamless = true
 noise = SubResource("FastNoiseLite_m8iue")
+seamless = true
 
 [resource]
 shader = ExtResource("1_m8iue")
