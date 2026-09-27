@@ -22,11 +22,11 @@ FEATURES
 # EXAMPLES
 <div align="center">
 <img src="example_01.gif" alt="ballon example 01" width="400">
-Easy balloon position management
+<p>Easy balloon position management</p>
 
 <img src="example_02.gif" alt="ballon example 02" width="400">
-Text always on screen
+<p>Text always on screen</p>
 
 <img src="example_03.gif" alt="ballon example 03" width="400">
-Text mantain the size
+<p>Text mantain the size</p>
 </div>
