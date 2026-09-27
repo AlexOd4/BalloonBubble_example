@@ -20,7 +20,7 @@ FEATURES
 - Examine scripts/ to see how Dialogue Manager is integrated with your gameplay
 
 # EXAMPLES
-
+<div align="center">
 <img src="example_01.gif" alt="ballon example 01" width="400">
 Easy balloon position management
 
@@ -29,3 +29,4 @@ Text always on screen
 
 <img src="example_03.gif" alt="ballon example 03" width="400">
 Text mantain the size
+</div>
