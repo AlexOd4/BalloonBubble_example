@@ -21,11 +21,11 @@ FEATURES
 
 # EXAMPLES
 
-[example_01](example_01.gif)
+<img src="example_01.gif" alt="ballon example 01" width="400">
 Easy balloon position management
 
-[example_02](example_02.gif)
+<img src="example_02.gif" alt="ballon example 02" width="400">
 Text always on screen
 
-[example_03](example_03.gif)
+<img src="example_03.gif" alt="ballon example 03" width="400">
 Text mantain the size
