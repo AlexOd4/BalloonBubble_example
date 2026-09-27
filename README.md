@@ -18,3 +18,7 @@ FEATURES
 - Review the dialogue files in the dialog/ folder to understand the conversation structure
 - Check the scenes/ folder to see how dialogue bubbles are implemented
 - Examine scripts/ to see how Dialogue Manager is integrated with your gameplay
+
+# EXAMPLES
+
+[example_01](./example_01)
