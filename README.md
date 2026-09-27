@@ -21,4 +21,11 @@ FEATURES
 
 # EXAMPLES
 
-[example_01](./example_01)
+[example_01](example_01.gif)
+Easy balloon position management
+
+[example_02](example_02.gif)
+Text always on screen
+
+[example_03](example_03.gif)
+Text mantain the size
